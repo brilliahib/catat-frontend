@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
+import NavBottom from "@/components/molecules/nav/NavBottom";
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -22,8 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${rubik.variable} antialiased font-rubik`}>
-        <main className="flex w-full justify-center px-5 sm:px-0">
-          <div className="w-full max-w-lg">{children}</div>
+        <main className="w-full max-w-lg mx-auto">
+          {children}
+          <NavBottom />
         </main>
       </body>
     </html>
