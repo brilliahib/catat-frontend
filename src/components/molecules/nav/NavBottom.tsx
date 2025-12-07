@@ -3,6 +3,7 @@
 import { ArrowLeftRight, ChartPie, Plus } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import DrawerCreateTransaction from "../drawer/DrawerCreateTransaction";
 
 export default function NavBottom() {
   const pathname = usePathname();
@@ -28,14 +29,10 @@ export default function NavBottom() {
                 </Link>
               </li>
 
-              {/* Add Button */}
               <li className="relative bottom-4 min-w-[56px]">
-                <div className="flex flex-col justify-center gap-2 items-center bg-primary rounded-full p-5 text-white">
-                  <Plus className="h-7 w-7" />
-                </div>
+                <DrawerCreateTransaction />
               </li>
 
-              {/* Reports */}
               <li className="flex-1">
                 <Link href={"/reports"}>
                   <div
