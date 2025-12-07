@@ -22,7 +22,7 @@ export default function HeaderHomeSection() {
         </div>
         <div className="space-y-4">
           <p className="text-muted">Total Pengeluaran</p>
-          <h1 className="font-bold text-4xl text-white">Rp 13.000.000</h1>
+          <h1 className="font-semibold text-4xl text-white">Rp 13.000.000</h1>
         </div>
       </div>
     </div>
