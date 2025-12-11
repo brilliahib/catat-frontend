@@ -71,7 +71,7 @@ export default function DrawerCreateTransaction() {
         </div>
       </DrawerTrigger>
 
-      <DrawerContent className="w-full max-w-lg mx-auto min-h-[95vh] pb-10">
+      <DrawerContent className="w-full max-w-lg mx-auto min-h-[70vh] pb-10">
         <DrawerHeader className="font-semibold">
           Create Transaction
         </DrawerHeader>
