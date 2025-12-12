@@ -48,17 +48,13 @@ export default function CardListTransaction() {
                 >
                   <div className={`rounded-full text-xl`}>💼</div>
                 </Button>
-                <div>
-                  <h3 className="font-medium md:text-base text-sm">
-                    {item.title}
-                  </h3>
-                  <p className="text-muted-foreground md:text-base text-sm">
-                    {item.desc}
-                  </p>
+                <div className="space-y-1">
+                  <h3 className="font-medium text-sm">{item.title}</h3>
+                  <p className="text-muted-foreground text-xs">{item.desc}</p>
                 </div>
               </div>
 
-              <h3 className="md:text-base text-sm">
+              <h3 className="font-medium text-sm">
                 {item.amount.toLocaleString("id-ID", {
                   style: "currency",
                   currency: "IDR",
