@@ -1,7 +1,5 @@
+import ReportWrapper from "@/components/organisms/reports/ReportWrapper";
+
 export default function ReportPage() {
-  return (
-    <section>
-      <div></div>
-    </section>
-  );
+  return <ReportWrapper />;
 }

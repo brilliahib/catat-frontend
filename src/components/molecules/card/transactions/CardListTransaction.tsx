@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Handbag } from "lucide-react";
 
 // TODO: replace with real data (api)
 const transactions = [
@@ -41,9 +41,13 @@ export default function CardListTransaction() {
           {transactions.map((item, idx) => (
             <div key={idx} className="flex justify-between gap-3">
               <div className="flex gap-3">
-                <div className={`p-4 rounded-full w-fit ${item.iconBg}`}>
-                  <Handbag className={`h-5 w-5 ${item.iconColor}`} />
-                </div>
+                <Button
+                  variant={"ghost"}
+                  size={"icon-lg"}
+                  className={`${item.iconBg} ${item.iconColor} flex-shrink-0 rounded-full`}
+                >
+                  <div className={`rounded-full text-xl`}>💼</div>
+                </Button>
                 <div>
                   <h3 className="font-medium md:text-base text-sm">
                     {item.title}
