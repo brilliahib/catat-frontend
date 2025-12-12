@@ -3,5 +3,5 @@ interface PageContainerProps {
 }
 
 export default function PageContainer({ children }: PageContainerProps) {
-  return <section className="p-6">{children}</section>;
+  return <section className="md:p-6 p-4">{children}</section>;
 }
