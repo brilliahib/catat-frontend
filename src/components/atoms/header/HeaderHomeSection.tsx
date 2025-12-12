@@ -2,18 +2,23 @@
 
 import { Search, Settings, Eye, EyeOff } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function HeaderHomeSection() {
   const [hideAmount, setHideAmount] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("hideAmount");
-    if (saved) setHideAmount(saved === "true");
+    setHideAmount(saved === "true");
+    setIsReady(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("hideAmount", hideAmount.toString());
-  }, [hideAmount]);
+    if (isReady) {
+      localStorage.setItem("hideAmount", hideAmount.toString());
+    }
+  }, [hideAmount, isReady]);
 
   return (
     <div
@@ -33,20 +38,29 @@ export default function HeaderHomeSection() {
 
       <div className="space-y-2 text-center text-white">
         <div className="flex justify-center items-center gap-2">
-          <h1 className="font-semibold text-4xl">
-            {hideAmount ? "••••••••" : "Rp 13.000.000"}
-          </h1>
-
-          {hideAmount ? (
-            <EyeOff
-              className="h-6 w-6 cursor-pointer"
-              onClick={() => setHideAmount(false)}
-            />
+          {!isReady ? (
+            <>
+              <Skeleton className="w-40 h-10 bg-white/20" />
+              <Skeleton className="w-6 h-6 rounded-full bg-white/20" />
+            </>
           ) : (
-            <Eye
-              className="h-6 w-6 cursor-pointer"
-              onClick={() => setHideAmount(true)}
-            />
+            <>
+              <h1 className="font-semibold text-4xl">
+                {hideAmount ? "••••••••" : "Rp 13.000.000"}
+              </h1>
+
+              {hideAmount ? (
+                <EyeOff
+                  className="h-6 w-6 cursor-pointer"
+                  onClick={() => setHideAmount(false)}
+                />
+              ) : (
+                <Eye
+                  className="h-6 w-6 cursor-pointer"
+                  onClick={() => setHideAmount(true)}
+                />
+              )}
+            </>
           )}
         </div>
 

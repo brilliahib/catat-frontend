@@ -29,7 +29,7 @@ export default function NavBottom() {
                       isActive("/") ? "text-primary" : "text-muted-foreground"
                     }`}
                   >
-                    <Home className="h-6 w-6" />
+                    <Home className="md:h-6 md:w-6 w-5 h-5" />
                     <span className="text-xs">Home</span>
                   </div>
                 </Link>
@@ -44,7 +44,7 @@ export default function NavBottom() {
                         : "text-muted-foreground"
                     }`}
                   >
-                    <ChartPie className="h-6 w-6" />
+                    <ChartPie className="md:h-6 md:w-6 w-5 h-5" />
                     <span className="text-xs">Reports</span>
                   </div>
                 </Link>
@@ -63,7 +63,7 @@ export default function NavBottom() {
                         : "text-muted-foreground"
                     }`}
                   >
-                    <Wallet className="h-6 w-6" />
+                    <Wallet className="md:h-6 md:w-6 w-5 h-5" />
                     <span className="text-xs">Budget</span>
                   </div>
                 </Link>
@@ -78,7 +78,7 @@ export default function NavBottom() {
                         : "text-muted-foreground"
                     }`}
                   >
-                    <CircleUserRound className="h-6 w-6" />
+                    <CircleUserRound className="md:h-6 md:w-6 w-5 h-5" />
                     <span className="text-xs">Profile</span>
                   </div>
                 </Link>
