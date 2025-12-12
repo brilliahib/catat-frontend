@@ -4,6 +4,7 @@ import {
   ArrowLeftRight,
   ChartPie,
   CircleUserRound,
+  Home,
   Wallet,
 } from "lucide-react";
 import Link from "next/link";
@@ -28,8 +29,8 @@ export default function NavBottom() {
                       isActive("/") ? "text-primary" : "text-muted-foreground"
                     }`}
                   >
-                    <ArrowLeftRight className="h-6 w-6" />
-                    <span className="text-xs">Transactions</span>
+                    <Home className="h-6 w-6" />
+                    <span className="text-xs">Home</span>
                   </div>
                 </Link>
               </li>
