@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CalendarIcon, Plus } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function DrawerCreateTransaction() {
   const [open, setOpen] = useState(false);
@@ -37,7 +38,6 @@ export default function DrawerCreateTransaction() {
     return date.toISOString().split("T")[0];
   };
 
-  // 🧮 Kalkulator handling
   const handlePress = (key: string) => {
     if (key === "AC") return setAmount("0");
     if (key === "DEL")
@@ -47,7 +47,6 @@ export default function DrawerCreateTransaction() {
       return setAmount((prev) => (prev === "0" ? "0" : prev + "000"));
     }
 
-    // prevent leading zero spam
     if (amount === "0" && key !== ".") {
       return setAmount(key);
     }
@@ -66,12 +65,12 @@ export default function DrawerCreateTransaction() {
   return (
     <Drawer>
       <DrawerTrigger asChild className="cursor-pointer">
-        <div className="flex flex-col justify-center gap-2 items-center bg-primary rounded-full p-5 text-white">
+        <div className="flex flex-col justify-center gap-2 items-center bg-primary rounded-full md:p-5 p-3 text-white">
           <Plus className="h-7 w-7" />
         </div>
       </DrawerTrigger>
 
-      <DrawerContent className="w-full max-w-lg mx-auto min-h-[95vh] pb-10">
+      <DrawerContent className="w-full max-w-lg mx-auto min-h-[70vh] pb-10">
         <DrawerHeader className="font-semibold">
           Create Transaction
         </DrawerHeader>
@@ -94,70 +93,74 @@ export default function DrawerCreateTransaction() {
             </AnimatePresence>
           </div>
 
-          <Select>
-            <SelectTrigger className="w-full bg-[#f7f7f7] border-0 rounded-lg py-5 ">
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent />
-          </Select>
+          <ScrollArea className="h-[50vh]">
+            <div className="space-y-4">
+              <Select>
+                <SelectTrigger className="w-full bg-[#f7f7f7] border-0 rounded-lg py-5 ">
+                  <SelectValue placeholder="Select Category" />
+                </SelectTrigger>
+                <SelectContent />
+              </Select>
 
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <div className="relative w-full">
-                <Input
-                  id="date"
-                  value={value}
-                  placeholder="Select date"
-                  className="bg-[#f7f7f7] text-sm border-0 py-5 rounded-lg pr-10 cursor-pointer"
-                  readOnly
-                />
-                <CalendarIcon className="absolute top-1/2 right-2 size-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />
-              </div>
-            </PopoverTrigger>
+              <Popover open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <div className="relative w-full">
+                    <Input
+                      id="date"
+                      value={value}
+                      placeholder="Select date"
+                      className="bg-[#f7f7f7] text-sm border-0 py-5 rounded-lg pr-10 cursor-pointer"
+                      readOnly
+                    />
+                    <CalendarIcon className="absolute top-1/2 right-2 size-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+                  </div>
+                </PopoverTrigger>
 
-            <PopoverContent
-              className="w-auto overflow-hidden p-0 shadow-sm rounded-xl"
-              align="center"
-            >
-              <Calendar
-                mode="single"
-                selected={date}
-                className="rounded-xl"
-                captionLayout="dropdown"
-                month={month}
-                onMonthChange={setMonth}
-                onSelect={(d) => {
-                  setDate(d);
-                  setValue(formatDate(d));
-                  setOpen(false);
-                }}
+                <PopoverContent
+                  className="w-auto overflow-hidden p-0 shadow-sm rounded-xl"
+                  align="center"
+                >
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    className="rounded-xl"
+                    captionLayout="dropdown"
+                    month={month}
+                    onMonthChange={setMonth}
+                    onSelect={(d) => {
+                      setDate(d);
+                      setValue(formatDate(d));
+                      setOpen(false);
+                    }}
+                  />
+                </PopoverContent>
+              </Popover>
+
+              <Input
+                placeholder="Notes..."
+                className="rounded-lg bg-[#f7f7f7] py-5 border-0 text-sm"
               />
-            </PopoverContent>
-          </Popover>
 
-          <Input
-            placeholder="Notes..."
-            className="rounded-lg bg-[#f7f7f7] py-5 border-0 text-sm"
-          />
-
-          <div className="grid grid-cols-4 gap-2">
-            {KEYS.flat().map((key) => (
-              <Button
-                key={key}
-                onClick={() => handlePress(key)}
-                className={`h-14 rounded-xl text-lg ${
-                  key === "OK"
-                    ? "col-span-1 bg-primary text-white hover:bg-primary/90"
-                    : key === "000"
-                    ? "col-span-1"
-                    : ""
-                } ${key === "0" ? "col-span-2" : ""}`}
-                variant="outline"
-              >
-                {key === "DEL" ? "⌫" : key}
-              </Button>
-            ))}
-          </div>
+              <div className="grid grid-cols-4 gap-2">
+                {KEYS.flat().map((key) => (
+                  <Button
+                    key={key}
+                    onClick={() => handlePress(key)}
+                    className={`h-14 rounded-xl text-lg ${
+                      key === "OK"
+                        ? "col-span-1 bg-primary text-white hover:bg-primary/90"
+                        : key === "000"
+                        ? "col-span-1"
+                        : ""
+                    } ${key === "0" ? "col-span-2" : ""}`}
+                    variant="outline"
+                  >
+                    {key === "DEL" ? "⌫" : key}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </ScrollArea>
         </div>
       </DrawerContent>
     </Drawer>
