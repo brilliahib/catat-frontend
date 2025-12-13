@@ -23,10 +23,12 @@ export default function NavBottom() {
           <nav className="bg-background py-2">
             <ul className="grid grid-cols-5 items-center">
               <li>
-                <Link href={"/"}>
+                <Link href={"/transactions"}>
                   <div
                     className={`flex flex-col justify-center gap-2 items-center ${
-                      isActive("/") ? "text-primary" : "text-muted-foreground"
+                      isActive("/transactions")
+                        ? "text-primary"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <Home className="md:h-6 md:w-6 w-5 h-5" />

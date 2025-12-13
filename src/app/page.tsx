@@ -1,5 +1,5 @@
-import TransactionWrapper from "@/components/organisms/transactions/TransactionWrapper";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <TransactionWrapper />;
+  return redirect("/transactions");
 }
