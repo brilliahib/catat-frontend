@@ -3,10 +3,20 @@
 import { Search, Settings, Eye, EyeOff } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useSession } from "next-auth/react";
+import { useGetTotalAmountThisMonth } from "@/http/transactions/get-total-amount-this-month";
+import { formatPrice } from "@/utils/price";
 
 export default function HeaderHomeSection() {
   const [hideAmount, setHideAmount] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const { data: session, status } = useSession();
+  const { data, isPending } = useGetTotalAmountThisMonth(
+    session?.access_token as string,
+    {
+      enabled: status === "authenticated",
+    }
+  );
 
   useEffect(() => {
     const saved = localStorage.getItem("hideAmount");
@@ -28,7 +38,7 @@ export default function HeaderHomeSection() {
       <div className="flex justify-between items-center text-white">
         <div>
           <span className="text-white/70">Welcome,</span>
-          <h1 className="font-medium">Muhammad Ahib Ibrilli</h1>
+          <h1 className="font-medium">{session?.user?.name}</h1>
         </div>
         <div className="flex gap-4 items-center">
           <Search className="h-5 w-5" />
@@ -46,7 +56,7 @@ export default function HeaderHomeSection() {
           ) : (
             <>
               <h1 className="font-semibold text-4xl">
-                {hideAmount ? "••••••••" : "Rp 13.000.000"}
+                {hideAmount ? "••••••••" : formatPrice(data?.data.total)}
               </h1>
 
               {hideAmount ? (
