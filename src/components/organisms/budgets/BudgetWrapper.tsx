@@ -8,8 +8,19 @@ import BudgetContent from "./BudgetContent";
 import { Info } from "lucide-react";
 import { useState } from "react";
 import DialogBudgetInformation from "@/components/atoms/dialog/budgets/DialogBudgetInformation";
+import { useSession } from "next-auth/react";
+import { useGetRemainingBudget } from "@/http/budget/get-remaining-budget";
 
 export default function BudgetWrapper() {
+  const { data: session, status } = useSession();
+
+  const { data, isPending } = useGetRemainingBudget(
+    session?.access_token as string,
+    {
+      enabled: status === "authenticated",
+    }
+  );
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleOpenDialog = () => {
@@ -26,10 +37,10 @@ export default function BudgetWrapper() {
               onClick={handleOpenDialog}
             />
           </div>
-          <BudgetHeaderContent />
+          <BudgetHeaderContent data={data?.data} isPending={isPending} />
         </PageContainer>
       </HeaderSection>
-      <BudgetContent />
+      <BudgetContent data={data?.data} isPending={isPending} />
 
       <DialogBudgetInformation open={isDialogOpen} setOpen={setIsDialogOpen} />
     </>

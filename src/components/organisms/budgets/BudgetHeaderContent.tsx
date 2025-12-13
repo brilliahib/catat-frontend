@@ -3,10 +3,20 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { BudgetRemaining } from "@/types/budget/budget";
+import { formatPrice } from "@/utils/price";
 
-export default function BudgetHeaderContent() {
-  const [hideAmount, setHideAmount] = useState<boolean>(false);
-  const [isReady, setIsReady] = useState<boolean>(false);
+interface BudgetHeaderContentProps {
+  data?: BudgetRemaining;
+  isPending?: boolean;
+}
+
+export default function BudgetHeaderContent({
+  data,
+  isPending = false,
+}: BudgetHeaderContentProps) {
+  const [hideAmount, setHideAmount] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("hideBudgetAmount");
@@ -20,9 +30,9 @@ export default function BudgetHeaderContent() {
     }
   }, [hideAmount, isReady]);
 
-  if (!isReady) {
+  if (isPending || !isReady) {
     return (
-      <div className="flex justify-center items-center text-center">
+      <div className="flex justify-center items-center text-center pb-8">
         <div className="flex flex-col gap-2">
           <Skeleton className="w-24 h-4 mx-auto" />
           <div className="flex justify-center items-center gap-2">
@@ -38,9 +48,10 @@ export default function BudgetHeaderContent() {
     <div className="flex justify-center items-center text-center pb-8">
       <div className="flex flex-col gap-2">
         <span className="text-muted">Sisa Budget</span>
+
         <div className="flex justify-center items-center gap-2">
           <h3 className="font-semibold text-4xl">
-            {hideAmount ? "••••••••" : "Rp500.000"}
+            {hideAmount ? "••••••••" : formatPrice(data?.remaining ?? 0)}
           </h3>
 
           {hideAmount ? (

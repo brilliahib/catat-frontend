@@ -10,6 +10,7 @@ import { formatPrice } from "@/utils/price";
 export default function HeaderHomeSection() {
   const [hideAmount, setHideAmount] = useState(false);
   const [isReady, setIsReady] = useState(false);
+
   const { data: session, status } = useSession();
   const { data, isPending } = useGetTotalAmountThisMonth(
     session?.access_token as string,
@@ -30,6 +31,8 @@ export default function HeaderHomeSection() {
     }
   }, [hideAmount, isReady]);
 
+  const isLoading = isPending || !isReady;
+
   return (
     <div
       className="px-6 pt-4 pb-20 space-y-16
@@ -40,6 +43,7 @@ export default function HeaderHomeSection() {
           <span className="text-white/70">Welcome,</span>
           <h1 className="font-medium">{session?.user?.name}</h1>
         </div>
+
         <div className="flex gap-4 items-center">
           <Search className="h-5 w-5" />
           <Settings className="h-5 w-5" />
@@ -48,7 +52,7 @@ export default function HeaderHomeSection() {
 
       <div className="space-y-2 text-center text-white">
         <div className="flex justify-center items-center gap-2">
-          {!isReady ? (
+          {isLoading ? (
             <>
               <Skeleton className="w-40 h-10 bg-white/20" />
               <Skeleton className="w-6 h-6 rounded-full bg-white/20" />
@@ -56,7 +60,7 @@ export default function HeaderHomeSection() {
           ) : (
             <>
               <h1 className="font-semibold text-4xl">
-                {hideAmount ? "••••••••" : formatPrice(data?.data.total)}
+                {hideAmount ? "••••••••" : formatPrice(data?.data.total ?? 0)}
               </h1>
 
               {hideAmount ? (
