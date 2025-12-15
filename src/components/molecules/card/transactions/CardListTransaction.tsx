@@ -61,7 +61,7 @@ export default function CardListTransaction() {
               })}
             </h3>
 
-            <div className="space-y-2">
+            <div className="space-y-4">
               {day.transactions.map((trx) => {
                 const category = getTransactionCategory(trx.type);
 
@@ -80,7 +80,7 @@ export default function CardListTransaction() {
                             </span>
                           </Button>
 
-                          <div className="space-y-1">
+                          <div>
                             <h3 className="text-sm font-medium">
                               {category.title}
                             </h3>

@@ -5,7 +5,7 @@ export type TransactionCategory = {
   title: string;
 };
 
-const CATEGORY_MAP: Record<string, TransactionCategory> = {
+export const CATEGORY_MAP: Record<string, TransactionCategory> = {
   Eating: {
     title: "Makan & Minum",
     icon: "🍽️",
@@ -54,7 +54,7 @@ const CATEGORY_MAP: Record<string, TransactionCategory> = {
     iconBg: "bg-gray-100/80",
     iconColor: "text-gray-500",
   },
-};
+} as const;
 
 export function getTransactionCategory(type: string): TransactionCategory {
   return CATEGORY_MAP[type] ?? CATEGORY_MAP.Other;

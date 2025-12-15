@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ArrowLeftRight,
-  ChartPie,
-  CircleUserRound,
-  Home,
-  Wallet,
-} from "lucide-react";
+import { ChartPie, CircleUserRound, Home, Wallet } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import DrawerCreateTransaction from "../drawer/DrawerCreateTransaction";
